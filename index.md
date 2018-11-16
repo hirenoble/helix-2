@@ -21,7 +21,6 @@
 It works! helix-2 is up and running.
 
 
-Testing!
 
 ## What's next?
 
