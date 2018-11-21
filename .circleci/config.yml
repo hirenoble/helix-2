@@ -35,16 +35,16 @@ jobs:
             command: npx hlx build
 
         - run:
-            name: Showing Working Copy Status
-            command: git status
+            name: Resetting Working Copy
+            command: git checkout -- .git checkout -- .
 
         - run:
             name: Deploying to Adobe I/O Runtime
-            command: npx hlx deploy --no-auto --dirty
+            command: npx hlx deploy --no-auto | cat
 
         - run:
             name: Activate CDN
-            command: npx hlx publish
+            command: npx hlx publish | cat
 
         - run:
             name: Test Performance
