@@ -31,12 +31,16 @@ jobs:
             key: v1-dependencies-{{ checksum "package-lock.json" }}
 
         - run:
+            name: Reset package-lock.json
+            command:  test ! -f package.json && rm package-lock.json || echo "package.json exists"
+
+        - run:
             name: Building Templates
             command: npx hlx build
 
         - run:
             name: Resetting Working Copy
-            command: git checkout -- .
+            command: git status; git checkout -- .
 
         - run:
             name: Deploying to Adobe I/O Runtime
