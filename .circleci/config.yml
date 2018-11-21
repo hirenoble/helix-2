@@ -9,7 +9,7 @@ jobs:
 
         - run:
             name: Provide package-lock.json
-            command:  if [ ! -f package.json ];then; touch package-lock.json; fi
+            command:  test ! -f package.json && touch package-lock.json || echo "package.json exists"
 
         # Download and cache dependencies
         - restore_cache:
@@ -19,7 +19,7 @@ jobs:
 
         - run:
             name: Installing Dependencies
-            command: if [ ! -f package.json ];then; npm install; fi
+            command: test -f package.json && npm install || echo "package.json does not exist"
 
         - run:
             name: Installing Helix CLI
