@@ -53,6 +53,12 @@ jobs:
         - run:
             name: Test Performance
             command: |
+                mkdir -p junit
                 if [ ! -z $HLX_CALIBRE_AUTH ]; then
-                    hlx perf
+                    npx hlx perf --junit junit/test-results.xml
+                else
+                    echo "Add HLX_CALIBRE_AUTH to your CircleCI config to enable performance testing"
                 fi
+
+        - store_test_results:
+            path: junit
