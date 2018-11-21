@@ -52,4 +52,7 @@ jobs:
 
         - run:
             name: Test Performance
-            command: npx hlx perf
+            command: |
+                if [ ! -z $HLX_CALIBRE_AUTH ]; then
+                    hlx perf
+                fi
