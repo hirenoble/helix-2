@@ -7,6 +7,10 @@ jobs:
     steps:
         - checkout
 
+        - run:
+            name: Provide package-lock.json
+            command:  if [ ! -f package.json ];then; touch package-lock.json; fi
+
         # Download and cache dependencies
         - restore_cache:
             keys:
@@ -15,7 +19,7 @@ jobs:
 
         - run:
             name: Installing Dependencies
-            command: npm install
+            command: if [ ! -f package.json ];then; npm install; fi
 
         - run:
             name: Installing Helix CLI
@@ -29,6 +33,10 @@ jobs:
         - run:
             name: Building Templates
             command: npx hlx build
+
+        - run:
+            name: Showing Working Copy Status
+            command: git status
 
         - run:
             name: Deploying to Adobe I/O Runtime
